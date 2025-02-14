@@ -2,20 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .zoom-out {
+    @apply min-h-screen h-full w-full max-w-screen-2xl mx-auto font-[family-name:var(--font-geist-sans)] !important;
+  }
+
+  .inputText {
+    @apply rounded-[5px] sm:p-2 ring-1 ring-[#D0D5DD] outline-1 outline-[#FA9874] outline-offset-0 !important;
+  }
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #ffffff;
     --foreground: #ededed;
   }
 }
 
 body {
-  color: var(--foreground);
+  color: black;
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
