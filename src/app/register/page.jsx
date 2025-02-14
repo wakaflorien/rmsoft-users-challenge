@@ -8,6 +8,7 @@ import { validateForm } from "@/utils/validation";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { useTheme } from "../contexts/ThemeProvider";
 
 function Register() {
   const router = useRouter()
@@ -19,6 +20,8 @@ function Register() {
     password: "",
     type: 0,
   });
+
+  const { theme, toggleTheme } = useTheme();
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -43,7 +46,7 @@ function Register() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center w-full font-[family-name:var(--font-geist-sans)] zoom-out">
+    <div className={`flex flex-col items-center justify-center w-full font-[family-name:var(--font-geist-sans)] zoom-out ${theme === "dark" && "!text-white !bg-green-950"}`}>
       <main className="w-full flex flex-col gap-2 sm:gap-8 max-w-[500px] p-4 sm:p-12 sm:m-8 border border-green-600 rounded-lg">
         <header className="text-lg sm:text-xl font-bold text-green-600">Please register to continue</header>
         <form className="flex flex-col gap-2 sm:gap-6">
