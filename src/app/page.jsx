@@ -7,6 +7,8 @@ import { validateForm } from "@/utils/validation";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTheme } from "./contexts/ThemeProvider";
+import { Icon } from "@iconify-icon/react";
 
 export default function Home() {
   const router = useRouter()
@@ -15,6 +17,8 @@ export default function Home() {
     email: "",
     password: "",
   });
+
+  const { theme, toggleTheme } = useTheme();
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -27,9 +31,7 @@ export default function Home() {
   const handleLogin = async () => {
 
     try {
-      console.log("Login values", formState);
       const response = await login(formState);
-      console.log("Login response", response)
 
       localStorage.setItem("token", response.token);
 
@@ -43,7 +45,17 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center w-full font-[family-name:var(--font-geist-sans)] zoom-out">
+    <div className={`flex flex-col items-center justify-center w-full font-[family-name:var(--font-geist-sans)] zoom-out ${theme === "dark" && "!text-white !bg-green-950"}`}>
+      <div
+        className="ml-0 h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent cursor-pointer"
+        onClick={toggleTheme}
+      >
+        {theme === "dark" ? (
+          <Icon icon="si:clear-day-line" width={18} />
+        ) : (
+          <Icon icon="mdi:weather-night" width={18} />
+        )}
+      </div>
       <main className="w-full flex flex-col gap-2 sm:gap-8 max-w-[500px] p-4 sm:p-12 sm:m-8 border border-green-600 rounded-lg">
         <header className="text-lg sm:text-xl font-bold text-green-600">Please login to continue</header>
         <form className="flex flex-col gap-2 sm:gap-6">
